@@ -1,0 +1,27 @@
+
+# Without using visited
+class Solution:
+    def islandsAndTreasure(self, grid: List[List[int]]) -> None:
+        m, n = len(grid), len(grid[0])
+        q = deque()
+        d = 1
+
+        def add_to_queue(r, c):
+            if r >= 0 and r < m and c >= 0 and c < n and grid[r][c] ==2147483647:
+                q.append((r, c))
+                grid[r][c] = d
+
+
+        for r in range(m):
+            for c in range(n):
+                if  grid[r][c] == 0:
+                    q.append((r, c))
+
+        while q:
+            for _ in range(len(q)):
+                r, c = q.popleft()
+                add_to_queue(r-1, c)                
+                add_to_queue(r+1, c)                
+                add_to_queue(r, c-1)                
+                add_to_queue(r, c+1)       
+            d+=1
